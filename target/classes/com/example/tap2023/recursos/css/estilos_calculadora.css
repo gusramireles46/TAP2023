@@ -1,0 +1,6 @@
+.button {
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px;
+    -fx-font-weight: bold;
+    -fx-font-size: 18px;
+}
