@@ -16,7 +16,7 @@ public class TAP2023 extends Application {
     private Scene escena;
     private BorderPane borderPane;
     private MenuBar menuBar;
-    private Menu menuParcial1, menuParcial2, menuSalir;
+    private Menu menuParcial1, menuParcial2, menuOpciones;
     private MenuItem mniCalculadora, mniLoteria, mniSalir;
 
     private void CrearGUI() {
@@ -36,11 +36,11 @@ public class TAP2023 extends Application {
 
         menuParcial2 = new Menu("Parcial 2");
 
-        menuSalir = new Menu("Salir");
-        menuSalir.getItems().add(mniSalir);
+        menuOpciones = new Menu("Más opciones");
+        menuOpciones.getItems().add(mniSalir);
 
         // MenuBar
-        menuBar = new MenuBar(menuParcial1, menuParcial2, menuSalir);
+        menuBar = new MenuBar(menuParcial1, menuParcial2, menuOpciones);
     }
 
     private void salir() {
