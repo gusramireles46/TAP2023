@@ -1,6 +1,25 @@
+.root {
+    -fx-background-color: rgb(26, 27, 31);
+}
+
 .button {
-    -fx-border-radius: 50px;
+    -fx-border-radius: 50%;
     -fx-background-radius: 50px;
     -fx-font-weight: bold;
     -fx-font-size: 18px;
+}
+
+.button.operator {
+    -fx-background-color: rgb(62, 70, 89);
+    -fx-text-fill: rgb(220, 228, 247);
+}
+
+.button.clear {
+    -fx-background-color: rgb(93, 58, 100);
+    -fx-text-fill: rgb(249, 212, 253);
+}
+
+.button.number {
+    -fx-background-color: rgb(32, 35, 42);
+    -fx-text-fill: rgb(223, 229, 251);
 }

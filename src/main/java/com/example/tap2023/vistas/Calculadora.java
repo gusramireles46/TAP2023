@@ -1,5 +1,6 @@
 package com.example.tap2023.vistas;
 
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -50,7 +51,6 @@ public class Calculadora extends Stage {
         int pos = 0;
         for (int i = 0; i < arrTeclado.length; i++) {
             for (int j = 0; j < arrTeclado[i].length; j++) {
-                //String textoBoton = arrDigitos[pos];
                 arrTeclado[i][j] = new Button(arrDigitos[pos]);
                 arrTeclado[i][j].setPrefSize(65, 65);
 
@@ -70,13 +70,13 @@ public class Calculadora extends Stage {
 
                 int finalPos = pos;
                 arrTeclado[i][j].setOnAction(event -> procesarBoton(arrDigitos[finalPos]));
+                GridPane.setMargin(arrTeclado[i][j], new Insets(2));
 
                 gdpTeclado.add(arrTeclado[i][j], j, i);
                 pos++;
             }
         }
         vbox.getChildren().addAll(txfResultado, gdpTeclado);
-
     }
 
     private void procesarBoton(String textoBoton) {
