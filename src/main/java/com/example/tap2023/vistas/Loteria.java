@@ -45,7 +45,7 @@ public class Loteria extends Stage {
         for (int i = 0; i < 4; i++) {
             for (int j = 0; j < 4; j++) {
                 try {
-                    Image imgCartaP = new Image(Objects.requireNonNull(getClass().getResource("/com/example/tap2023/recursos/images/loteria/"+arElementos[pos]+".jpg")).toExternalForm());
+                    Image imgCartaP = new Image(Objects.requireNonNull(getClass().getResource("/images/loteria/" +arElementos[pos]+".jpg")).toExternalForm());
                     imageCarta = new ImageView(imgCartaP);
                     imageCarta.setFitHeight(130);
                     imageCarta.setFitWidth(90);
@@ -66,7 +66,7 @@ public class Loteria extends Stage {
     // Hacer un efecto de clicked en el botón cuando se inicia el juego
 
     private void crearMazo() {
-        Image imgDorso = new Image(Objects.requireNonNull(getClass().getResource("/com/example/tap2023/recursos/images/loteria/ln1.jpg")).toExternalForm());
+        Image imgDorso = new Image(Objects.requireNonNull(getClass().getResource("/images/loteria/ln1.jpg")).toExternalForm());
         imvCarta = new ImageView(imgDorso);
         imvCarta.setFitWidth(100);
         imvCarta.setFitHeight(200);

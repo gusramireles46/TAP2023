@@ -32,7 +32,7 @@ public class Calculadora extends Stage {
     public Calculadora() {
         CrearGUI();
         escena = new Scene(vbox, 260, 375);
-        escena.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/com/example/tap2023/recursos/css/estilos_calculadora.css")).toExternalForm());
+        escena.getStylesheets().add(Objects.requireNonNull(getClass().getResource("/css/estilos_calculadora.css")).toExternalForm());
         this.setTitle("Calculadora");
         this.setScene(escena);
         this.setResizable(false);

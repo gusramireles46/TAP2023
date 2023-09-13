@@ -60,7 +60,7 @@ public class TAP2023 extends Application {
         borderPane.setTop(menuBar);
 
         escena = new Scene(borderPane, 640, 480);
-        escena.getStylesheets().add(getClass().getResource("/com/example/tap2023/recursos/css/estilos_principal.css").toExternalForm());
+        escena.getStylesheets().add(getClass().getResource("/css/estilos_principal.css").toExternalForm());
         stage.setScene(escena);
         stage.setMaximized(true);
         stage.show();
