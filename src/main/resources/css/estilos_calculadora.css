@@ -38,3 +38,13 @@
     -fx-background-color: rgba(32, 35, 42, 0.25);
     -fx-text-fill: rgb(223, 229, 251);
 }
+
+.button.equal {
+    -fx-background-color: rgb(34, 70, 128);
+    -fx-text-fill: rgb(221, 235, 255);
+}
+
+.button.equal:pressed {
+    -fx-background-color: rgba(34, 70, 128, 0.5);
+    -fx-text-fill: rgb(221, 235, 255);
+}

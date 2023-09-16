@@ -56,7 +56,7 @@ public class Calculadora extends Stage {
 
                 if (arrDigitos[pos].matches("[0-9.]")) {
                     arrTeclado[i][j].getStyleClass().add("number");
-                } else if (arrDigitos[pos].matches("[-+*/=]")) {
+                } else if (arrDigitos[pos].matches("[-+*/]")) {
                     arrTeclado[i][j].getStyleClass().add("operator");
                 } else if (arrDigitos[pos].equals("C")) {
                     arrTeclado[i][j].getStyleClass().add("clear");
@@ -66,6 +66,8 @@ public class Calculadora extends Stage {
                     arrTeclado[i][j].getStyleClass().add("operator");
                 } else if (arrDigitos[pos].equals("±")) {
                     arrTeclado[i][j].getStyleClass().add("operator");
+                } else if (arrDigitos[pos].equals("=")) {
+                    arrTeclado[i][j].getStyleClass().add("equal");
                 }
 
                 int finalPos = pos;

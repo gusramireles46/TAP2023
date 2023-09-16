@@ -11,7 +11,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.Objects;
+import java.util.*;
 
 public class Loteria extends Stage {
 
@@ -24,6 +24,8 @@ public class Loteria extends Stage {
     private final Button[][] btnTablilla = new Button[4][4];
     private GridPane gdpTablilla;
     private String[] arElementos = {"ln0", "ln1", "ln2", "ln3", "ln4", "ln5", "ln6", "ln7", "ln8", "ln9", "ln10", "ln11", "ln12", "ln13", "ln14", "ln15"};
+    private Timer timer;
+    private List<String> arrRandom, tablilla1, tablilla2, tablilla3, tablilla4, tablilla5;
 
     private void CrearGUI(){
         CrearTablilla();
@@ -71,13 +73,7 @@ public class Loteria extends Stage {
         imvCarta.setFitWidth(100);
         imvCarta.setFitHeight(200);
         btnIniciar = new Button("Iniciar");
-        btnIniciar.setOnAction(event -> {
-            Alert a = new Alert(Alert.AlertType.INFORMATION);
-            a.setTitle("Información");
-            a.setHeaderText(null);
-            a.setContentText("Esto es una alerta");
-            a.showAndWait();
-        });
+        btnIniciar.setOnAction(event -> iniciarJuago());
         vMazo = new VBox(imvCarta, btnIniciar);
     }
 
@@ -87,6 +83,20 @@ public class Loteria extends Stage {
         this.setTitle("Lotería");
         this.setScene(escena);
         this.show();
+    }
+
+    public void revolverCartas(String[] arElementos) {
+        arrRandom = Arrays.asList(arElementos);
+        Collections.shuffle(arrRandom);
+    }
+
+    private void sacarCartaMazo() {
+
+    }
+
+    private void iniciarJuago() {
+        revolverCartas(arElementos);
+
     }
 
 }
