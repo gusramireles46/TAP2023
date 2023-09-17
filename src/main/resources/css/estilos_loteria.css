@@ -1,0 +1,52 @@
+.button.elemento-carta:hover {
+    -fx-background-color: rgba(0,0,0,0.25);
+}
+
+.button.elemento-carta:disabled {
+    -fx-background-color: black;
+}
+
+.button.btnIniciar {
+    -fx-background-color: rgb(228, 219, 69);
+    -fx-font-size: 24;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}
+
+.button.btnIniciar:hover {
+    -fx-background-color: rgb(57, 53, 17);
+    -fx-text-fill: white;
+    -fx-font-size: 24;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}
+
+.button.btnAnterior {
+    -fx-background-color: rgb(106, 79, 53);
+    -fx-font-size: 24;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}
+
+.button.btnSiguiente {
+    -fx-background-color: rgb(106, 79, 53);
+    -fx-font-size: 24;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}
+
+.button.btnAnterior:hover {
+    -fx-background-color: rgb(59, 46, 36);
+    -fx-text-fill: white;
+    -fx-font-size: 24;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}
+
+.button.btnSiguiente:hover {
+    -fx-background-color: rgb(59, 46, 36);
+    -fx-text-fill: white;
+    -fx-font-size: 24;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}

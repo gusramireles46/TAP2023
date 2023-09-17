@@ -1,6 +1,8 @@
 package com.example.tap2023.vistas;
 
+import javafx.application.Platform;
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -15,6 +17,8 @@ import java.util.*;
 
 public class Loteria extends Stage {
 
+    public static boolean juegoIniciado = false;
+    public static String carta;
     private Scene escena;
     private HBox hPrincipal, hBtnSeleccion;
     private VBox vTablilla, vMazo;
@@ -22,64 +26,80 @@ public class Loteria extends Stage {
     private Image imgCarta;
     private ImageView imageCarta, imvCarta;
     private final Button[][] btnTablilla = new Button[4][4];
+    private Button btnActual;
     private GridPane gdpTablilla;
-    private String[] arElementos = {"ln0", "ln1", "ln2", "ln3", "ln4", "ln5", "ln6", "ln7", "ln8", "ln9", "ln10", "ln11", "ln12", "ln13", "ln14", "ln15"};
-    private Timer timer;
-    private List<String> arrRandom, tablilla1, tablilla2, tablilla3, tablilla4, tablilla5;
+    private String[] arElementos = {"bully_boy", "bully_girl", "chefs", "doctor", "Ghost", "gnomo", "guest", "hunter", "janitor", "lady", "mono", "normal_six", "patients", "Six", "six_music_box", "teacher", "thinman", "viewers", "yellow_raincoat_girl", "Alone", "Low", "pigtail_girl", "rk", "six_distorcionada", };
+    private static List<String> arrRandom;
+    private Tablilla[] tablilla = new Tablilla[5];
+    private GridPane[] gridPanes = new GridPane[5];
+    private int numTablilla = 0;
+    Timer timer;
+    public static int cartaActual = 0;
 
     private void CrearGUI(){
         CrearTablilla();
         crearMazo();
-        btnAnterior = new Button("<-");
+        btnAnterior = new Button("◀");
+        btnAnterior.getStyleClass().add("btnAnterior");
         btnAnterior.setPrefSize(210, 100);
-        btnSiguiente = new Button("->");
+        btnAnterior.setOnAction(event -> mostrarAnterior());
+        btnSiguiente = new Button("▶");
+        btnSiguiente.getStyleClass().add("btnSiguiente");
         btnSiguiente.setPrefSize(210, 100);
+        btnSiguiente.setOnAction(event -> mostrarSiguiente());
         hBtnSeleccion = new HBox(btnAnterior, btnSiguiente);
-        vTablilla = new VBox(gdpTablilla, hBtnSeleccion);
-        //vTablilla.setSpacing(20);
+        numTablilla = 0;
+        vTablilla = new VBox(gridPanes[numTablilla], hBtnSeleccion);
+        vTablilla.setSpacing(20);
         hPrincipal = new HBox(vTablilla, vMazo);
         hPrincipal.setPadding(new Insets(20));
+        hPrincipal.setSpacing(20);
+        hPrincipal.setAlignment(Pos.CENTER);
     }
 
     private void CrearTablilla() {
-        gdpTablilla = new GridPane();
-        int pos = 0;
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                try {
-                    Image imgCartaP = new Image(Objects.requireNonNull(getClass().getResource("/images/loteria/" +arElementos[pos]+".jpg")).toExternalForm());
-                    imageCarta = new ImageView(imgCartaP);
-                    imageCarta.setFitHeight(130);
-                    imageCarta.setFitWidth(90);
-                    btnTablilla[i][j] = new Button();
-                    btnTablilla[i][j].setPrefSize(100, 140);
-                    btnTablilla[i][j].setGraphic(imageCarta);
-                    gdpTablilla.add(btnTablilla[i][j], i, j);
-                    pos++;
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
+        for (int i = 0; i < tablilla.length; i++) {
+            tablilla[i] = new Tablilla();
+            gridPanes[i] = new GridPane();
+            gridPanes[i] = tablilla[i].getGdpTablilla(arElementos);
         }
     }
 
-    // Clase Timer para cambiar las cartas del mazo
-    // Randomizar todas las cartas
-    // Hacer un efecto de clicked en el botón cuando se inicia el juego
+    private void mostrarSiguiente() {
+        if (numTablilla == 4)
+            numTablilla = 0;
+        else
+            numTablilla++;
+        vTablilla.getChildren().clear();
+        vTablilla.getChildren().addAll(gridPanes[numTablilla], hBtnSeleccion);
+    }
+
+    private void mostrarAnterior() {
+        if (numTablilla == 0)
+            numTablilla = 4;
+        else
+            numTablilla--;
+        vTablilla.getChildren().clear();
+        vTablilla.getChildren().addAll(gridPanes[numTablilla], hBtnSeleccion);
+    }
 
     private void crearMazo() {
-        Image imgDorso = new Image(Objects.requireNonNull(getClass().getResource("/images/loteria/ln1.jpg")).toExternalForm());
+        Image imgDorso = new Image(Objects.requireNonNull(getClass().getResource("/images/loteria/dorso.jpg")).toExternalForm());
         imvCarta = new ImageView(imgDorso);
-        imvCarta.setFitWidth(100);
-        imvCarta.setFitHeight(200);
+        imvCarta.setFitWidth(200);
+        imvCarta.setFitHeight(350);
         btnIniciar = new Button("Iniciar");
-        btnIniciar.setOnAction(event -> iniciarJuago());
+        btnIniciar.setOnAction(event -> iniciarJuego());
+        btnIniciar.getStyleClass().add("btnIniciar");
         vMazo = new VBox(imvCarta, btnIniciar);
+        vMazo.setSpacing(20);
+        vMazo.setAlignment(Pos.CENTER);
     }
 
     public Loteria() {
         CrearGUI();
         escena = new Scene(hPrincipal, 850, 650);
+        escena.getStylesheets().add(getClass().getResource("/css/estilos_loteria.css").toString());
         this.setTitle("Lotería");
         this.setScene(escena);
         this.show();
@@ -90,13 +110,48 @@ public class Loteria extends Stage {
         Collections.shuffle(arrRandom);
     }
 
-    private void sacarCartaMazo() {
-
+    public void sacarCartaMazo() {
+        if (cartaActual < arrRandom.size()) {
+            carta = arrRandom.get(cartaActual);
+            Image imgCarta = new Image(getClass().getResource("/images/loteria/" + carta + ".png").toExternalForm());
+            imvCarta.setImage(imgCarta);
+            cartaActual++;
+        } else {
+            timer.cancel();
+            if (Tablilla.elementosSeleccionados == 16) {
+                Platform.runLater(() -> {
+                    Alert a = new Alert(Alert.AlertType.INFORMATION);
+                    a.setTitle("Información");
+                    a.setHeaderText("Has ganado el juego");
+                    a.setContentText("Has completado tu tablilla");
+                    a.showAndWait();
+                    timer.cancel();
+                });
+            } else {
+                Platform.runLater(() -> {
+                    Alert a = new Alert(Alert.AlertType.ERROR);
+                    a.setTitle("Información");
+                    a.setHeaderText("Has perdido el juego");
+                    a.setContentText("No has completado tu tablilla");
+                    a.showAndWait();
+                    timer.cancel();
+                });
+            }
+        }
     }
 
-    private void iniciarJuago() {
+    private void iniciarJuego() {
+        juegoIniciado = true;
+        btnActual = null;
+        btnSiguiente.setDisable(true);
+        btnAnterior.setDisable(true);
         revolverCartas(arElementos);
-
+        timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                sacarCartaMazo();
+            }
+        }, 0, 5000);
     }
-
 }
