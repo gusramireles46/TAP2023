@@ -1,5 +1,6 @@
 package com.example.tap2023.vistas;
 
+import javafx.application.Platform;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -18,7 +19,7 @@ public class Tablilla {
     private Button[][] btnTablilla = new Button[4][4];
     private List<String> arrCartas;
 
-    public GridPane getGdpTablilla (String[] arrElementos) {
+    public GridPane getGdpTablilla(String[] arrElementos) {
         gdpTablilla = new GridPane();
         gdpTablilla.getStylesheets().add(getClass().getResource("/css/estilos_loteria.css").toString());
         arrCartas = Arrays.asList(arrElementos);
@@ -28,7 +29,7 @@ public class Tablilla {
             for (int j = 0; j < 4; j++) {
                 try {
                     String carta = arrCartas.get(pos);
-                    Image imgCartaP = new Image(Objects.requireNonNull(getClass().getResource("/images/loteria/" +carta+".png")).toExternalForm());
+                    Image imgCartaP = new Image(Objects.requireNonNull(getClass().getResource("/images/loteria/" + carta + ".png")).toExternalForm());
                     imageCarta = new ImageView(imgCartaP);
                     imageCarta.setFitHeight(130);
                     imageCarta.setFitWidth(90);
@@ -44,8 +45,18 @@ public class Tablilla {
                             if (Loteria.carta.equals(carta)) {
                                 btnTablilla[finalI][finalJ].setDisable(true);
                                 elementosSeleccionados++;
+                                if (elementosSeleccionados == 16) {
+                                    Platform.runLater(() -> {
+                                        Alert a = new Alert(Alert.AlertType.INFORMATION);
+                                        a.setTitle("Información");
+                                        a.setHeaderText("Has ganado el juego");
+                                        a.setContentText("Has completado tu tablilla");
+                                        a.showAndWait();
+                                        Loteria.timer.cancel();
+                                    });
                                 }
                             }
+                        }
                     });
 
                     gdpTablilla.add(btnTablilla[i][j], i, j);

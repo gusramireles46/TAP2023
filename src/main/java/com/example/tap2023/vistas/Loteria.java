@@ -26,17 +26,16 @@ public class Loteria extends Stage {
     private Image imgCarta;
     private ImageView imageCarta, imvCarta;
     private final Button[][] btnTablilla = new Button[4][4];
-    private Button btnActual;
     private GridPane gdpTablilla;
-    private String[] arElementos = {"bully_boy", "bully_girl", "chefs", "doctor", "Ghost", "gnomo", "guest", "hunter", "janitor", "lady", "mono", "normal_six", "patients", "Six", "six_music_box", "teacher", "thinman", "viewers", "yellow_raincoat_girl", "Alone", "Low", "pigtail_girl", "rk", "six_distorcionada", };
+    private String[] arElementos = {"bully_boy", "bully_girl", "chefs", "doctor", "Ghost", "gnomo", "guest", "hunter", "janitor", "lady", "mono", "normal_six", "patients", "Six", "six_music_box", "teacher", "thinman", "viewers", "yellow_raincoat_girl", "Alone", "Low", "pigtail_girl", "rk", "six_distorcionada",};
     private static List<String> arrRandom;
     private Tablilla[] tablilla = new Tablilla[5];
     private GridPane[] gridPanes = new GridPane[5];
     private int numTablilla = 0;
-    Timer timer;
+    public static Timer timer;
     public static int cartaActual = 0;
 
-    private void CrearGUI(){
+    private void CrearGUI() {
         CrearTablilla();
         crearMazo();
         btnAnterior = new Button("◀");
@@ -118,16 +117,7 @@ public class Loteria extends Stage {
             cartaActual++;
         } else {
             timer.cancel();
-            if (Tablilla.elementosSeleccionados == 16) {
-                Platform.runLater(() -> {
-                    Alert a = new Alert(Alert.AlertType.INFORMATION);
-                    a.setTitle("Información");
-                    a.setHeaderText("Has ganado el juego");
-                    a.setContentText("Has completado tu tablilla");
-                    a.showAndWait();
-                    timer.cancel();
-                });
-            } else {
+            if (Tablilla.elementosSeleccionados != 16) {
                 Platform.runLater(() -> {
                     Alert a = new Alert(Alert.AlertType.ERROR);
                     a.setTitle("Información");
@@ -142,7 +132,7 @@ public class Loteria extends Stage {
 
     private void iniciarJuego() {
         juegoIniciado = true;
-        btnActual = null;
+        btnIniciar.setDisable(true);
         btnSiguiente.setDisable(true);
         btnAnterior.setDisable(true);
         revolverCartas(arElementos);
