@@ -22,7 +22,7 @@ public class Loteria extends Stage {
     private Scene escena;
     private HBox hPrincipal, hBtnSeleccion;
     private VBox vTablilla, vMazo;
-    private Button btnAnterior, btnSiguiente, btnIniciar;
+    private Button btnAnterior, btnSiguiente, btnIniciar, btnReiniciar;
     private Image imgCarta;
     private ImageView imageCarta, imvCarta;
     private final Button[][] btnTablilla = new Button[4][4];
@@ -90,9 +90,16 @@ public class Loteria extends Stage {
         btnIniciar = new Button("Iniciar");
         btnIniciar.setOnAction(event -> iniciarJuego());
         btnIniciar.getStyleClass().add("btnIniciar");
-        vMazo = new VBox(imvCarta, btnIniciar);
+        btnReiniciar = new Button("Reiniciar");
+        btnReiniciar.setOnAction(event -> reiniciarLoteria());
+        vMazo = new VBox(imvCarta, btnIniciar, btnReiniciar);
         vMazo.setSpacing(20);
         vMazo.setAlignment(Pos.CENTER);
+    }
+
+    private void reiniciarLoteria() {
+        this.close();
+        new Loteria();
     }
 
     public Loteria() {
