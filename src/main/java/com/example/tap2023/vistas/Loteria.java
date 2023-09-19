@@ -27,7 +27,7 @@ public class Loteria extends Stage {
     private ImageView imageCarta, imvCarta;
     private final Button[][] btnTablilla = new Button[4][4];
     private GridPane gdpTablilla;
-    private String[] arElementos = {"bully_boy", "bully_girl", "chefs", "doctor", "Ghost", "gnomo", "guest", "hunter", "janitor", "lady", "mono", "normal_six", "patients", "Six", "six_music_box", "teacher", "thinman", "viewers", "yellow_raincoat_girl", "Alone", "Low", "pigtail_girl", "rk", "six_distorcionada",};
+    private String[] arElementos = {"bully_boy", "bully_girl", "chefs", "doctor", "Ghost", "gnomo", "guest", "hunter", "janitor", "lady", "mono", "normal_six", "patients", "Six", "six_music_box", "teacher", "thinman", "viewers", "yellow_raincoat_girl", "Alone", "Low", "pigtail_girl", "rk", "six_distorcionada", "ferryman", "hands", "thinman_hat"};
     private static List<String> arrRandom;
     private Tablilla[] tablilla = new Tablilla[5];
     private GridPane[] gridPanes = new GridPane[5];
@@ -101,6 +101,10 @@ public class Loteria extends Stage {
         escena.getStylesheets().add(getClass().getResource("/css/estilos_loteria.css").toString());
         this.setTitle("Lotería");
         this.setScene(escena);
+        this.setOnCloseRequest(event -> {
+            if (timer != null)
+                timer.cancel();
+        });
         this.show();
     }
 

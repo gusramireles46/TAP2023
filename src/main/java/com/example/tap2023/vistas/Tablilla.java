@@ -20,6 +20,7 @@ public class Tablilla {
     private List<String> arrCartas;
 
     public GridPane getGdpTablilla(String[] arrElementos) {
+        elementosSeleccionados = 0;
         gdpTablilla = new GridPane();
         gdpTablilla.getStylesheets().add(getClass().getResource("/css/estilos_loteria.css").toString());
         arrCartas = Arrays.asList(arrElementos);
