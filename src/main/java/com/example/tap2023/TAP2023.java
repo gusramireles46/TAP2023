@@ -2,6 +2,7 @@ package com.example.tap2023;
 
 import com.example.tap2023.vistas.Calculadora;
 import com.example.tap2023.vistas.Loteria;
+import com.example.tap2023.vistas.Restaurante;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -17,7 +18,7 @@ public class TAP2023 extends Application {
     private BorderPane borderPane;
     private MenuBar menuBar;
     private Menu menuParcial1, menuParcial2, menuOpciones;
-    private MenuItem mniCalculadora, mniLoteria, mniSalir;
+    private MenuItem mniCalculadora, mniLoteria, mniSalir, mniRestaurante;
 
     private void CrearGUI() {
         // Menú Items
@@ -27,6 +28,9 @@ public class TAP2023 extends Application {
         mniLoteria = new MenuItem("Lotería");
         mniLoteria.setOnAction(event -> new Loteria());
 
+        mniRestaurante = new MenuItem("Restaurante");
+        mniRestaurante.setOnAction(event -> new Restaurante());
+
         mniSalir = new MenuItem("Salir");
         mniSalir.setOnAction(event -> salir());
 
@@ -35,6 +39,7 @@ public class TAP2023 extends Application {
         menuParcial1.getItems().addAll(mniCalculadora, mniLoteria);
 
         menuParcial2 = new Menu("Parcial 2");
+        menuParcial2.getItems().addAll(mniRestaurante);
 
         menuOpciones = new Menu("Más opciones");
         menuOpciones.getItems().add(mniSalir);
