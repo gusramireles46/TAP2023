@@ -91,6 +91,7 @@ public class Loteria extends Stage {
         btnIniciar.setOnAction(event -> iniciarJuego());
         btnIniciar.getStyleClass().add("btnIniciar");
         btnReiniciar = new Button("Reiniciar");
+        btnReiniciar.getStyleClass().add("btnReiniciar");
         btnReiniciar.setOnAction(event -> reiniciarLoteria());
         vMazo = new VBox(imvCarta, btnIniciar, btnReiniciar);
         vMazo.setSpacing(20);
@@ -99,6 +100,8 @@ public class Loteria extends Stage {
 
     private void reiniciarLoteria() {
         this.close();
+        if (timer != null)
+            timer.cancel();
         new Loteria();
     }
 
@@ -128,13 +131,15 @@ public class Loteria extends Stage {
             cartaActual++;
         } else {
             timer.cancel();
-            if (Tablilla.elementosSeleccionados != 16) {
+            if (Tablilla.elementosSeleccionados != 16 && juegoIniciado) {
                 Platform.runLater(() -> {
                     Alert a = new Alert(Alert.AlertType.ERROR);
                     a.setTitle("Información");
                     a.setHeaderText("Has perdido el juego");
                     a.setContentText("No has completado tu tablilla");
                     a.showAndWait();
+                    cartaActual = 0;
+                    juegoIniciado = false;
                     timer.cancel();
                 });
             }

@@ -48,12 +48,14 @@ public class Tablilla {
                                 elementosSeleccionados++;
                                 if (elementosSeleccionados == 16) {
                                     Platform.runLater(() -> {
+                                        Loteria.timer.cancel();
+                                        Loteria.cartaActual = 0;
+                                        Loteria.juegoIniciado = false;
                                         Alert a = new Alert(Alert.AlertType.INFORMATION);
                                         a.setTitle("Información");
                                         a.setHeaderText("Has ganado el juego");
                                         a.setContentText("Has completado tu tablilla");
                                         a.showAndWait();
-                                        Loteria.timer.cancel();
                                     });
                                 }
                             }

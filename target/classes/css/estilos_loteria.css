@@ -50,3 +50,17 @@
     -fx-border-radius: 50%;
     -fx-background-radius: 50%;
 }
+
+.button.btnReiniciar {
+    -fx-background-color: rgb(68, 115, 137);
+    -fx-font-size: 24;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}
+
+.button.btnReiniciar:hover {
+    -fx-background-color: rgb(67, 91, 102);
+    -fx-font-size: 24;
+    -fx-border-radius: 50%;
+    -fx-background-radius: 50%;
+}
