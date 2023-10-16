@@ -1,5 +1,7 @@
 package com.example.tap2023;
 
+import com.example.tap2023.models.Conexion;
+import com.example.tap2023.vistas.CRUDCategorias;
 import com.example.tap2023.vistas.Calculadora;
 import com.example.tap2023.vistas.Loteria;
 import com.example.tap2023.vistas.Restaurante;
@@ -18,7 +20,7 @@ public class TAP2023 extends Application {
     private BorderPane borderPane;
     private MenuBar menuBar;
     private Menu menuParcial1, menuParcial2, menuOpciones;
-    private MenuItem mniCalculadora, mniLoteria, mniSalir, mniRestaurante;
+    private MenuItem mniCalculadora, mniLoteria, mniSalir, mniRestaurante, mniCRUDCategorias;
 
     private void CrearGUI() {
         // Menú Items
@@ -27,6 +29,9 @@ public class TAP2023 extends Application {
 
         mniLoteria = new MenuItem("Lotería");
         mniLoteria.setOnAction(event -> new Loteria());
+
+        mniCRUDCategorias = new MenuItem("CRUD Categorias");
+        mniCRUDCategorias.setOnAction(event -> new CRUDCategorias());
 
         mniRestaurante = new MenuItem("Restaurante");
         mniRestaurante.setOnAction(event -> new Restaurante());
@@ -39,7 +44,7 @@ public class TAP2023 extends Application {
         menuParcial1.getItems().addAll(mniCalculadora, mniLoteria);
 
         menuParcial2 = new Menu("Parcial 2");
-        menuParcial2.getItems().addAll(mniRestaurante);
+        menuParcial2.getItems().addAll(mniCRUDCategorias, mniRestaurante);
 
         menuOpciones = new Menu("Más opciones");
         menuOpciones.getItems().add(mniSalir);
@@ -60,6 +65,7 @@ public class TAP2023 extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
+        connectionToDB();
         CrearGUI();
         borderPane = new BorderPane();
         borderPane.setTop(menuBar);
@@ -69,6 +75,11 @@ public class TAP2023 extends Application {
         stage.setScene(escena);
         stage.setMaximized(true);
         stage.show();
+    }
+
+    public void connectionToDB() {
+        Conexion.createConnection();
+        System.out.println("Conexión establecida");
     }
 
     public static void main(String[] args) {

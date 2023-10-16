@@ -14,6 +14,11 @@
     -fx-text-fill: rgb(220, 228, 247);
 }
 
+.button.operator:hover {
+    -fx-background-color: rgb(72, 80, 99);
+    -fx-text-fill: rgb(220, 228, 247);
+}
+
 .button.operator:pressed {
     -fx-background-color: rgba(62, 70, 89, 0.25);
     -fx-text-fill: rgb(220, 228, 247);
@@ -24,6 +29,11 @@
     -fx-text-fill: rgb(249, 212, 253);
 }
 
+.button.clear:hover {
+    -fx-background-color: rgb(103, 68, 110);
+    -fx-text-fill: rgb(249, 212, 253);
+}
+
 .button.clear:pressed {
     -fx-background-color: rgba(93, 58, 100, 0.5);
     -fx-text-fill: rgb(249, 212, 253);
@@ -31,6 +41,11 @@
 
 .button.number {
     -fx-background-color: rgb(32, 35, 42);
+    -fx-text-fill: rgb(223, 229, 251);
+}
+
+.button.number:hover {
+    -fx-background-color: rgb(42, 45, 52);
     -fx-text-fill: rgb(223, 229, 251);
 }
 
