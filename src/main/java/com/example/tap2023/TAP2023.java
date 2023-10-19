@@ -1,10 +1,8 @@
 package com.example.tap2023;
 
+import com.example.tap2023.componets.Hilo;
 import com.example.tap2023.models.Conexion;
-import com.example.tap2023.vistas.CRUDCategorias;
-import com.example.tap2023.vistas.Calculadora;
-import com.example.tap2023.vistas.Loteria;
-import com.example.tap2023.vistas.Restaurante;
+import com.example.tap2023.vistas.*;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -20,7 +18,7 @@ public class TAP2023 extends Application {
     private BorderPane borderPane;
     private MenuBar menuBar;
     private Menu menuParcial1, menuParcial2, menuOpciones;
-    private MenuItem mniCalculadora, mniLoteria, mniSalir, mniRestaurante, mniCRUDCategorias;
+    private MenuItem mniCalculadora, mniLoteria, mniSalir, mniRestaurante, mniCRUDCategorias, mniPista;
 
     private void CrearGUI() {
         // Menú Items
@@ -36,6 +34,9 @@ public class TAP2023 extends Application {
         mniRestaurante = new MenuItem("Restaurante");
         mniRestaurante.setOnAction(event -> new Restaurante());
 
+        mniPista = new MenuItem("Pista de atletismo");
+        mniPista.setOnAction(event -> new PistaAtletismo());
+
         mniSalir = new MenuItem("Salir");
         mniSalir.setOnAction(event -> salir());
 
@@ -44,7 +45,7 @@ public class TAP2023 extends Application {
         menuParcial1.getItems().addAll(mniCalculadora, mniLoteria);
 
         menuParcial2 = new Menu("Parcial 2");
-        menuParcial2.getItems().addAll(mniCRUDCategorias, mniRestaurante);
+        menuParcial2.getItems().addAll(mniCRUDCategorias, mniRestaurante, mniPista);
 
         menuOpciones = new Menu("Más opciones");
         menuOpciones.getItems().add(mniSalir);
@@ -64,7 +65,17 @@ public class TAP2023 extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws IOException {
+    public void start(Stage stage) {
+
+        /*new Hilo("Yuno").start();
+        new Hilo("Jara").start();
+        new Hilo("Martina").start();
+        new Hilo("Daniela").start();
+        new Hilo("Guadalupe").start();
+        new Hilo("Germán").start();
+
+         */
+
         connectionToDB();
         CrearGUI();
         borderPane = new BorderPane();
