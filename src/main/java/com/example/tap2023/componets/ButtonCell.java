@@ -15,7 +15,7 @@ public class ButtonCell extends TableCell<CategoriasDAO, String> {
     public ButtonCell(int opc) {
         this.opc = opc;
 
-        String txtBtn = this.opc == 1 ? "Borrar" : "Editar";
+        String txtBtn = this.opc == 1 ? "Eliminar" : "Editar";
         if (opc == 1) {
             btnCelda = new Button(txtBtn);
             btnCelda.setOnAction(event -> accionBoton());
