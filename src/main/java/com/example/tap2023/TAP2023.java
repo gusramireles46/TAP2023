@@ -17,8 +17,8 @@ public class TAP2023 extends Application {
     private Scene escena;
     private BorderPane borderPane;
     private MenuBar menuBar;
-    private Menu menuParcial1, menuParcial2, menuOpciones;
-    private MenuItem mniCalculadora, mniLoteria, mniSalir, mniRestaurante, mniCRUDCategorias, mniPista;
+    private Menu menuParcial1, menuParcial2, menuParcial3, menuOpciones;
+    private MenuItem mniCalculadora, mniLoteria, mniSalir, mniRestaurante, mniCRUDCategorias, mniPista, mniSimulador;
 
     private void CrearGUI() {
         // Menú Items
@@ -37,6 +37,9 @@ public class TAP2023 extends Application {
         mniPista = new MenuItem("Pista de atletismo");
         mniPista.setOnAction(event -> new PistaAtletismo());
 
+        mniSimulador = new MenuItem("Simulador de impresion");
+        mniSimulador.setOnAction(e -> new SimuladorImpresion());
+
         mniSalir = new MenuItem("Salir");
         mniSalir.setOnAction(event -> salir());
 
@@ -47,11 +50,14 @@ public class TAP2023 extends Application {
         menuParcial2 = new Menu("Parcial 2");
         menuParcial2.getItems().addAll(mniCRUDCategorias, mniRestaurante, mniPista);
 
+        menuParcial3 = new Menu("Parcial 3");
+        menuParcial3.getItems().addAll(mniSimulador);
+
         menuOpciones = new Menu("Más opciones");
         menuOpciones.getItems().add(mniSalir);
 
         // MenuBar
-        menuBar = new MenuBar(menuParcial1, menuParcial2, menuOpciones);
+        menuBar = new MenuBar(menuParcial1, menuParcial2, menuParcial3, menuOpciones);
     }
 
     private void salir() {
@@ -86,6 +92,17 @@ public class TAP2023 extends Application {
         stage.setScene(escena);
         stage.setMaximized(true);
         stage.show();
+        stage.setOnCloseRequest(e -> {
+            Alert a = new Alert(Alert.AlertType.CONFIRMATION);
+            a.setTitle("Información");
+            a.setHeaderText("Salir");
+            a.setContentText("Estas saliendo del programa");
+            Optional<ButtonType> option = a.showAndWait();
+            if (option.get() == ButtonType.OK)
+                System.exit(0);
+            else
+                e.consume();
+        });
     }
 
     public void connectionToDB() {

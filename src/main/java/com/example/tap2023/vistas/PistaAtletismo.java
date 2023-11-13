@@ -29,6 +29,7 @@ public class PistaAtletismo extends Stage {
         vbox = new VBox();
         for (int i = 0; i < pgbCorredores.length; i++) {
             pgbCorredores[i] = new ProgressBar(0);
+            lblNombre[i] = new Label(nombres[i]);
             thrCorredores[i] = new Hilo(nombres[i], pgbCorredores[i]);
             vbox.getChildren().addAll(lblNombre[i], pgbCorredores[i]);
         }

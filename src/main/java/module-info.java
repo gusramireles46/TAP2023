@@ -10,4 +10,5 @@ module com.example.tap2023 {
     exports com.example.tap2023.vistas;
     opens com.example.tap2023.vistas to javafx.fxml;
     opens com.example.tap2023.models;
+    exports com.example.tap2023.models;
 }

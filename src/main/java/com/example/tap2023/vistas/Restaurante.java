@@ -1,9 +1,7 @@
 package com.example.tap2023.vistas;
 
-import com.example.tap2023.models.CategoriasDAO;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
