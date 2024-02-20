@@ -46,6 +46,7 @@ public class Calculadora extends Stage {
         txfResultado.setAlignment(Pos.CENTER_RIGHT);
         txfResultado.setEditable(false);
         txfResultado.setPrefHeight(50);
+        txfResultado.setMaxWidth(Double.MAX_VALUE); // Permitir que el TextField se expanda automáticamente
 
         // Creación de los elementos de la calculadora
         int pos = 0;
@@ -118,16 +119,20 @@ public class Calculadora extends Stage {
 
     private void generarExpresion(String textoBoton) {
         if (textoBoton.equals(".")) {
-            // Validar si ya existe un punto decimal en el valor introducido actualmente
-            if (!entrada.contains(".")) {
+            // Validar si ya hay un punto decimal
+            if (!entrada.contains(".") && !(entrada.isEmpty() && textoBoton.equals("."))) {
                 entrada += textoBoton;
                 txfResultado.setText(entrada);
+            } else {
+                // Mostrar mensaje de error en la pantalla de la calculadora
+                txfResultado.setText("Error en la entrada");
             }
         } else {
             entrada += textoBoton;
             txfResultado.setText(entrada);
         }
     }
+
 
 
     private void mostrarResultado(double resultado) {
